@@ -45,26 +45,28 @@ class Crawler:
                 province['crawlTime'] = crawl_timestamp
                 province['country'] = country_type.get(province['countryType'])
 
+                province['tags'] = province['tags'].replace(' ', '')
+
                 # Parse the content with regex
-                confirmed = re.search(r'确诊 (.*?) 例', province['tags'])
+                confirmed = re.search(r'确诊(.*?)例', province['tags'])
                 if confirmed:
                     province['confirmed'] = confirmed.group(1)
                 else:
                     province['confirmed'] = 0
 
-                suspect = re.search(r'疑似 (.*?) 例', province['tags'])
+                suspect = re.search(r'疑似(.*?)例', province['tags'])
                 if suspect:
                     province['suspect'] = suspect.group(1)
                 else:
                     province['suspect'] = 0
 
-                cured = re.search(r'治愈 (.*?) 例', province['tags'])
+                cured = re.search(r'治愈(.*?)例', province['tags'])
                 if cured:
                     province['cured'] = cured.group(1)
                 else:
                     province['cured'] = 0
 
-                death = re.search(r'死亡 (.*?) 例', province['tags'])
+                death = re.search(r'死亡(.*?)例', province['tags'])
                 if death:
                     province['death'] = death.group(1)
                 else:
