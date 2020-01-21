@@ -32,8 +32,9 @@ class Crawler:
         self.url = "https://3g.dxy.cn/newh5/view/pneumonia"
 
     def run(self):
-        self.crawler()
-        time.sleep(60)
+        while True:
+            self.crawler()
+            time.sleep(60)
 
     def crawler(self):
         while True:
