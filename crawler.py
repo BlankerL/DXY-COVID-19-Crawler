@@ -9,6 +9,7 @@ from db import DB
 from countryTypeMap import country_type
 import re
 import json
+import time
 import logging
 import datetime
 import requests
@@ -23,6 +24,10 @@ class Crawler:
         self.session = requests.session()
         self.db = DB()
         self.url = "https://3g.dxy.cn/newh5/view/pneumonia"
+
+    def run(self):
+        self.crawler()
+        time.sleep(60)
 
     def crawler(self):
         while True:
@@ -73,4 +78,4 @@ class Crawler:
 
 if __name__ == '__main__':
     crawler = Crawler()
-    crawler.crawler()
+    crawler.run()
