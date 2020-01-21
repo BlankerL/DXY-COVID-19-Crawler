@@ -19,9 +19,15 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 
+headers = {
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.117 Safari/537.36'
+}
+
+
 class Crawler:
     def __init__(self):
         self.session = requests.session()
+        self.session.headers.update(headers)
         self.db = DB()
         self.url = "https://3g.dxy.cn/newh5/view/pneumonia"
 
