@@ -12,15 +12,23 @@ db = client['2019-nCov']
 
 class DB:
     def __init__(self):
-        self.collection = db['DXY']
+        self.db = db
 
-    def insert(self, data):
-        self.collection.insert(data)
+    def insert(self, collection, data):
+        self.db[collection].insert(data)
 
-    def find_one(self, province_name=None, modify_time=None):
-        return self.collection.find_one(
-            {
-                'provinceName': province_name,
-                'modifyTime': modify_time
-            }
-        )
+    def find_one(self, collection, province_name=None, summary=None, modify_time=None):
+        if collection == 'DXYNumber':
+            return self.db[collection].find_one(
+                {
+                    'provinceName': province_name,
+                    'modifyTime': modify_time
+                }
+            )
+        if collection == 'DXYNews':
+            return self.db[collection].find_one(
+                {
+                    'summary': summary,
+                    'modifyTime': modify_time
+                }
+            )
