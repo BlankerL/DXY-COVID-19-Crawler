@@ -97,7 +97,7 @@ class Crawler:
         for area in area_information:
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
-            area['crawlTime'] = self.crawl_timestamp
+            area['updateTime'] = self.crawl_timestamp
             self.db.insert(collection='DXYArea', data=area)
 
     def news_parser(self, news):
@@ -106,7 +106,7 @@ class Crawler:
             if self.db.find_one(collection='DXYNews', summary=_news['summary'], modify_time=_news['modifyTime']):
                 continue
             _news.pop('pubDateStr')
-            _news['updateTime'] = self.crawl_timestamp
+            _news['crawlTime'] = self.crawl_timestamp
             self.db.insert(collection='DXYNews', data=_news)
 
 
