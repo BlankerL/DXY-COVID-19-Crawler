@@ -106,7 +106,7 @@ class Crawler:
             if self.db.find_one(collection='DXYNews', summary=_news['summary'], modify_time=_news['modifyTime']):
                 continue
             _news.pop('pubDateStr')
-            _news['crawlTime'] = self.crawl_timestamp
+            _news['updateTime'] = self.crawl_timestamp
             self.db.insert(collection='DXYNews', data=_news)
 
 
