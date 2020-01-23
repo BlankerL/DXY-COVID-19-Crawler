@@ -42,19 +42,22 @@ class Crawler:
             r = self.session.get(url=self.url)
             soup = BeautifulSoup(r.content, 'lxml')
             province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
+            area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
             news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService'})))
-            if not province_information or not news:
+
+            if not province_information or not area_information or not news:
                 continue
-            self.num_parser(province_information=province_information)
-            self.news_crawler(news=news)
+            self.province_parser(province_information=province_information)
+            self.area_parser(area_information=area_information)
+            self.news_parser(news=news)
             break
 
         logger.info('Successfully crawled.')
 
-    def num_parser(self, province_information):
+    def province_parser(self, province_information):
         provinces = json.loads(province_information.group(0))
         for province in provinces:
-            if self.db.find_one(collection='DXYNumber', province_name=province['provinceName'], modify_time=province['modifyTime']):
+            if self.db.find_one(collection='DXYProvince', province_name=province['provinceName'], modify_time=province['modifyTime']):
                 continue
             province.pop('id')
             province['crawlTime'] = self.crawl_timestamp
@@ -87,9 +90,17 @@ class Crawler:
             else:
                 province['death'] = 0
 
-            self.db.insert(collection='DXYNumber', data=province)
+            self.db.insert(collection='DXYProvince', data=province)
 
-    def news_crawler(self, news):
+    def area_parser(self, area_information):
+        area_information = json.loads(area_information.group(0))
+        for area in area_information:
+            if self.db.find_one(collection='DXYArea', data=area):
+                continue
+            area['crawlTime'] = self.crawl_timestamp
+            self.db.insert(collection='DXYArea', data=area)
+
+    def news_parser(self, news):
         news = json.loads(news.group(0))
         for _news in news:
             if self.db.find_one(collection='DXYNews', summary=_news['summary'], modify_time=_news['modifyTime']):
