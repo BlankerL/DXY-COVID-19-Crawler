@@ -99,7 +99,6 @@ class Crawler:
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
             area['updateTime'] = self.crawl_timestamp
-            area['comment'] = area['comment'].replace(' ', '')
             self.db.insert(collection='DXYArea', data=area)
 
     def news_parser(self, news):
