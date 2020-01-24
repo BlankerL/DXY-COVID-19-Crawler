@@ -95,6 +95,7 @@ class Crawler:
     def area_parser(self, area_information):
         area_information = json.loads(area_information.group(0))
         for area in area_information:
+            area['comment'] = area['comment'].replace(' ', '')
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
             area['updateTime'] = self.crawl_timestamp
