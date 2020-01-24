@@ -18,6 +18,9 @@ class DB:
         self.db[collection].insert(data)
 
     def find_one(self, collection, data=None, province_name=None, summary=None, modify_time=None):
+        if collection == 'DXYOverall':
+            return self.db[collection].find_one(data)
+
         if collection == 'DXYProvince':
             return self.db[collection].find_one(
                 {
@@ -25,6 +28,10 @@ class DB:
                     'modifyTime': modify_time
                 }
             )
+
+        if collection == 'DXYArea':
+            return self.db[collection].find_one(data)
+
         if collection == 'DXYNews':
             return self.db[collection].find_one(
                 {
@@ -32,5 +39,3 @@ class DB:
                     'modifyTime': modify_time
                 }
             )
-        if collection == 'DXYArea':
-            return self.db[collection].find_one(data)
