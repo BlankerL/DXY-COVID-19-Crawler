@@ -79,6 +79,7 @@ class Crawler:
             if self.db.find_one(collection='DXYProvince', province_name=province['provinceName'], modify_time=province['modifyTime']):
                 continue
             province.pop('id')
+            province['comment'] = province['comment'].replace(' ', '')
             province['crawlTime'] = self.crawl_timestamp
             province['country'] = country_type.get(province['countryType'])
             province['tags'] = province['tags'].replace(' ', '')
