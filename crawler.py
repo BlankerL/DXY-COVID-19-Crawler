@@ -45,6 +45,7 @@ class Crawler:
             overall_information = re.search(r'\{("id".*?)\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
             province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
             area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
+            abroad_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
             news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService'})))
 
             if not overall_information or not province_information or not area_information or not news:
@@ -53,6 +54,7 @@ class Crawler:
             self.overall_parser(overall_information=overall_information)
             self.province_parser(province_information=province_information)
             self.area_parser(area_information=area_information)
+            self.abroad_parser(abroad_information=abroad_information)
             self.news_parser(news=news)
 
             break
@@ -95,6 +97,25 @@ class Crawler:
             area['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYArea', data=area)
+
+    def abroad_parser(self, abroad_information):
+        countries = json.loads(abroad_information.group(0))
+        for country in countries:
+            country.pop('id')
+            country.pop('tags')
+            country.pop('countryType')
+            country.pop('provinceId')
+            country['country'] = country.pop('provinceName')
+            country.pop('provinceShortName')
+            country.pop('cityName')
+            country.pop('sort')
+
+            country['comment'] = country['comment'].replace(' ', '')
+            if self.db.find_one(collection='DXYArea', data=country):
+                continue
+            country['updateTime'] = self.crawl_timestamp
+
+            self.db.insert(collection='DXYArea', data=country)
 
     def news_parser(self, news):
         news = json.loads(news.group(0))
