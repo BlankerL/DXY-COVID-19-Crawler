@@ -107,7 +107,7 @@ class Crawler:
             country.pop('tags')
             country.pop('countryType')
             country.pop('provinceId')
-            country['country'] = country.pop('provinceName')
+            country['country'] = country.get('provinceName')
             country.pop('provinceShortName')
             country.pop('cityName')
             country.pop('sort')
