@@ -80,6 +80,7 @@ class Crawler:
         for province in provinces:
             province.pop('id')
             province.pop('tags')
+            province.pop('sort')
             province['comment'] = province['comment'].replace(' ', '')
             if self.db.find_one(collection='DXYProvince', data=province):
                 continue
@@ -94,6 +95,7 @@ class Crawler:
             area['comment'] = area['comment'].replace(' ', '')
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
+            area['country'] = '中国'
             area['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYArea', data=area)
