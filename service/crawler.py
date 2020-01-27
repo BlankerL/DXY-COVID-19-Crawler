@@ -5,9 +5,9 @@
 @Date: 2020/1/21
 """
 from bs4 import BeautifulSoup
-from db import DB
-from parser import regex_parser
-from countryTypeMap import country_type
+from service.db import DB
+from service.parser import regex_parser
+from service.countryTypeMap import country_type
 import re
 import json
 import time
