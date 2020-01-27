@@ -76,15 +76,13 @@ class Crawler:
     def province_parser(self, province_information):
         provinces = json.loads(province_information.group(0))
         for province in provinces:
-            if self.db.find_one(collection='DXYProvince', province_name=province['provinceName'], modify_time=province['modifyTime']):
-                continue
             province.pop('id')
+            province.pop('tags')
             province['comment'] = province['comment'].replace(' ', '')
+            if self.db.find_one(collection='DXYProvince', data=province):
+                continue
             province['crawlTime'] = self.crawl_timestamp
             province['country'] = country_type.get(province['countryType'])
-            province['tags'] = province['tags'].replace(' ', '')
-
-            province = regex_parser(content=province, key='tags')
 
             self.db.insert(collection='DXYProvince', data=province)
 
@@ -95,15 +93,17 @@ class Crawler:
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
             area['updateTime'] = self.crawl_timestamp
+
             self.db.insert(collection='DXYArea', data=area)
 
     def news_parser(self, news):
         news = json.loads(news.group(0))
         for _news in news:
-            if self.db.find_one(collection='DXYNews', summary=_news['summary'], modify_time=_news['modifyTime']):
-                continue
             _news.pop('pubDateStr')
+            if self.db.find_one(collection='DXYNews', data=_news):
+                continue
             _news['crawlTime'] = self.crawl_timestamp
+
             self.db.insert(collection='DXYNews', data=_news)
 
 
