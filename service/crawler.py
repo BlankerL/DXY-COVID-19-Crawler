@@ -29,7 +29,6 @@ class Crawler:
         self.session.headers.update(headers)
         self.db = DB()
         self.crawl_timestamp = int()
-        self.url = "https://3g.dxy.cn/newh5/view/pneumonia"
 
     def run(self):
         while True:
@@ -39,7 +38,7 @@ class Crawler:
     def crawler(self):
         while True:
             self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
-            r = self.session.get(url=self.url)
+            r = self.session.get(url='https://3g.dxy.cn/newh5/view/pneumonia')
             soup = BeautifulSoup(r.content, 'lxml')
             overall_information = re.search(r'\{("id".*?)\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
             province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
@@ -57,6 +56,20 @@ class Crawler:
             self.news_parser(news=news)
 
             break
+
+        while True:
+            r = self.session.get(url='https://file1.dxycdn.com/2020/0127/797/3393185293879908067-115.json')
+            # Use try-except to ensure the .json() method will not raise exception.
+            try:
+                if r.status_code != 200:
+                    continue
+                elif r.json().get('code') == 'success':
+                    self.rumor_parser(rumors=r.json().get('data'))
+                    break
+                else:
+                    continue
+            except json.decoder.JSONDecodeError:
+                continue
 
         logger.info('Successfully crawled.')
 
@@ -126,6 +139,16 @@ class Crawler:
             _news['crawlTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYNews', data=_news)
+
+    def rumor_parser(self, rumors):
+        for rumor in rumors:
+            rumor.pop('score')
+            rumor['body'] = rumor['body'].replace(' ', '')
+            if self.db.find_one(collection='DXYRumors', data=rumor):
+                continue
+            rumor['crawlTime'] = self.crawl_timestamp
+
+            self.db.insert(collection='DXYRumors', data=rumor)
 
 
 if __name__ == '__main__':
