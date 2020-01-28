@@ -17,6 +17,10 @@ API：http://lab.isaaclin.cn/nCoV/
 
 爬虫本身并不复杂，可以**移步上方API，查看本爬虫能够获取到的所有信息条目**。同时，为了减少请求频率，已经在一次请求的时候获取足够的信息，这样能把流量让给更有需要的人。
 
+## Demo
+1. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
+   可视化效果：http://cuihuan.net/wuhan/news.html
+
 ## 捐赠
 本项目不需要任何捐赠。
 
