@@ -38,8 +38,12 @@ class Crawler:
     def crawler(self):
         while True:
             self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
-            r = self.session.get(url='https://3g.dxy.cn/newh5/view/pneumonia')
+            try:
+                r = self.session.get(url='https://3g.dxy.cn/newh5/view/pneumonia')
+            except requests.exceptions.ChunkedEncodingError:
+                continue
             soup = BeautifulSoup(r.content, 'lxml')
+
             overall_information = re.search(r'\{("id".*?)\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
             province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
             area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
@@ -58,7 +62,11 @@ class Crawler:
             break
 
         while True:
-            r = self.session.get(url='https://file1.dxycdn.com/2020/0127/797/3393185293879908067-115.json')
+            self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
+            try:
+                r = self.session.get(url='https://file1.dxycdn.com/2020/0127/797/3393185293879908067-115.json')
+            except requests.exceptions.ChunkedEncodingError:
+                continue
             # Use try-except to ensure the .json() method will not raise exception.
             try:
                 if r.status_code != 200:
