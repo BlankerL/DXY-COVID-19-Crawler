@@ -6,7 +6,6 @@
 """
 from bs4 import BeautifulSoup
 from service.db import DB
-from service.parser import regex_parser
 from service.countryTypeMap import country_type
 import re
 import json
@@ -71,7 +70,6 @@ class Crawler:
         overall_information['countRemark'] = overall_information['countRemark'].replace(' 疑似', '，疑似').replace(' 治愈', '，治愈').replace(' 死亡', '，死亡').replace(' ', '')
         if not self.db.find_one(collection='DXYOverall', data=overall_information):
             overall_information['updateTime'] = self.crawl_timestamp
-            overall_information = regex_parser(content=overall_information, key='countRemark')
 
             self.db.insert(collection='DXYOverall', data=overall_information)
 
