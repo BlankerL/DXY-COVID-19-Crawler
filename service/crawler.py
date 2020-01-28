@@ -15,7 +15,6 @@ import logging
 import datetime
 import requests
 
-
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 logger = logging.getLogger(__name__)
 
@@ -31,6 +30,13 @@ class Crawler:
         self.db = DB()
         self.crawl_timestamp = int()
         self.url = "https://3g.dxy.cn/newh5/view/pneumonia"
+        self.rumor_url = "https://file1.dxycdn.com/2020/0127/797/3393185293879908067-115.json"
+
+        self.overall_count = 0
+        self.province_count = 0
+        self.area_count = 0
+        self.news_count = 0
+        self.rumor_count = 0
 
     def run(self):
         while True:
@@ -39,16 +45,33 @@ class Crawler:
 
     def crawler(self):
         while True:
+            # reset counters
+            self.overall_count = 0
+            self.province_count = 0
+            self.area_count = 0
+            self.news_count = 0
+            self.rumor_count = 0
+
             self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
             r = self.session.get(url=self.url)
             soup = BeautifulSoup(r.content, 'lxml')
-            overall_information = re.search(r'\{("id".*?)\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
-            province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
+            overall_information = re.search(r'\{("id".*?)\}',
+                                            str(soup.find('script', attrs={'id': 'getStatisticsService'})))
+            province_information = re.search(r'\[(.*?)\]',
+                                             str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
             area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
-            abroad_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
+            abroad_information = re.search(r'\[(.*)\]',
+                                           str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
             news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService'})))
 
-            if not overall_information or not province_information or not area_information or not news:
+            rumor_resp = self.session.get(url=self.rumor_url + '?t=' + str(self.crawl_timestamp))
+            rumor_information = rumor_resp.json()
+
+            if not overall_information \
+                    or not province_information \
+                    or not area_information \
+                    or not news \
+                    or not rumor_information:
                 continue
 
             self.overall_parser(overall_information=overall_information)
@@ -56,10 +79,12 @@ class Crawler:
             self.area_parser(area_information=area_information)
             self.abroad_parser(abroad_information=abroad_information)
             self.news_parser(news=news)
+            self.rumor_parser(rumor_information=rumor_information)
 
             break
 
-        logger.info('Successfully crawled.')
+        logger.info('Successfully crawled. Added %d overall, %d province, %d area, %d news, %d rumor.' %
+                    (self.overall_count, self.province_count, self.area_count, self.news_count, self.rumor_count))
 
     def overall_parser(self, overall_information):
         overall_information = json.loads(overall_information.group(0))
@@ -68,11 +93,14 @@ class Crawler:
         overall_information.pop('modifyTime')
         overall_information.pop('imgUrl')
         overall_information.pop('deleted')
-        overall_information['countRemark'] = overall_information['countRemark'].replace(' 疑似', '，疑似').replace(' 治愈', '，治愈').replace(' 死亡', '，死亡').replace(' ', '')
+        overall_information['countRemark'] = overall_information['countRemark'].replace(' 疑似', '，疑似').replace(' 治愈',
+                                                                                                              '，治愈').replace(
+            ' 死亡', '，死亡').replace(' ', '')
         if not self.db.find_one(collection='DXYOverall', data=overall_information):
             overall_information['updateTime'] = self.crawl_timestamp
             overall_information = regex_parser(content=overall_information, key='countRemark')
 
+            self.overall_count += 1
             self.db.insert(collection='DXYOverall', data=overall_information)
 
     def province_parser(self, province_information):
@@ -87,6 +115,7 @@ class Crawler:
             province['crawlTime'] = self.crawl_timestamp
             province['country'] = country_type.get(province['countryType'])
 
+            self.province_count += 1
             self.db.insert(collection='DXYProvince', data=province)
 
     def area_parser(self, area_information):
@@ -98,6 +127,7 @@ class Crawler:
             area['country'] = '中国'
             area['updateTime'] = self.crawl_timestamp
 
+            self.area_count += 1
             self.db.insert(collection='DXYArea', data=area)
 
     def abroad_parser(self, abroad_information):
@@ -117,6 +147,7 @@ class Crawler:
                 continue
             country['updateTime'] = self.crawl_timestamp
 
+            self.area_count += 1
             self.db.insert(collection='DXYArea', data=country)
 
     def news_parser(self, news):
@@ -127,7 +158,19 @@ class Crawler:
                 continue
             _news['crawlTime'] = self.crawl_timestamp
 
+            self.news_count += 1
             self.db.insert(collection='DXYNews', data=_news)
+
+    def rumor_parser(self, rumor_information):
+        rumor = rumor_information['data']
+        for _rumor in rumor:
+            if self.db.find_one(collection='DXYRumor', data=_rumor):
+                continue
+
+            _rumor['crawlTime'] = self.crawl_timestamp
+
+            self.rumor_count += 1
+            self.db.insert(collection='DXYRumor', data=_rumor)
 
 
 if __name__ == '__main__':
