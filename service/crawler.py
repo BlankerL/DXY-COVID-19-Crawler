@@ -40,40 +40,38 @@ class Crawler:
 
     def run(self):
         while True:
-            self.crawler()
+            self.crawl()
             time.sleep(60)
 
-    def crawler(self):
-        while True:
-            # reset counters
-            self.overall_count = 0
-            self.province_count = 0
-            self.area_count = 0
-            self.news_count = 0
-            self.rumor_count = 0
+    def crawl(self):
+        # reset counters
+        self.overall_count = 0
+        self.province_count = 0
+        self.area_count = 0
+        self.news_count = 0
+        self.rumor_count = 0
 
-            self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
-            r = self.session.get(url=self.url)
-            soup = BeautifulSoup(r.content, 'lxml')
-            overall_information = re.search(r'\{("id".*?)\}',
-                                            str(soup.find('script', attrs={'id': 'getStatisticsService'})))
-            province_information = re.search(r'\[(.*?)\]',
-                                             str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
-            area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
-            abroad_information = re.search(r'\[(.*)\]',
-                                           str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
-            news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService'})))
+        self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
+        r = self.session.get(url=self.url)
+        soup = BeautifulSoup(r.content, 'lxml')
+        overall_information = re.search(r'\{("id".*?)\}',
+                                        str(soup.find('script', attrs={'id': 'getStatisticsService'})))
+        province_information = re.search(r'\[(.*?)\]',
+                                         str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
+        area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
+        abroad_information = re.search(r'\[(.*)\]',
+                                       str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
+        news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService'})))
 
-            rumor_resp = self.session.get(url=self.rumor_url + '?t=' + str(self.crawl_timestamp))
+        rumor_resp = self.session.get(url=self.rumor_url + '?t=' + str(self.crawl_timestamp))
+        if rumor_resp.status_code == 200:
             rumor_information = rumor_resp.json()
+        else:
+            logger.warning("Failed get rumor json. status code: %s, reason: %s."
+                           % (rumor_resp.status_code, rumor_resp.reason))
+            rumor_information = None
 
-            if not overall_information \
-                    or not province_information \
-                    or not area_information \
-                    or not news \
-                    or not rumor_information:
-                continue
-
+        if overall_information or province_information or area_information or news or rumor_information:
             self.overall_parser(overall_information=overall_information)
             self.province_parser(province_information=province_information)
             self.area_parser(area_information=area_information)
@@ -81,12 +79,12 @@ class Crawler:
             self.news_parser(news=news)
             self.rumor_parser(rumor_information=rumor_information)
 
-            break
-
         logger.info('Successfully crawled. Added %d overall, %d province, %d area, %d news, %d rumor.' %
                     (self.overall_count, self.province_count, self.area_count, self.news_count, self.rumor_count))
 
     def overall_parser(self, overall_information):
+        if overall_information is None:
+            return
         overall_information = json.loads(overall_information.group(0))
         overall_information.pop('id')
         overall_information.pop('createTime')
@@ -104,6 +102,8 @@ class Crawler:
             self.db.insert(collection='DXYOverall', data=overall_information)
 
     def province_parser(self, province_information):
+        if province_information is None:
+            return
         provinces = json.loads(province_information.group(0))
         for province in provinces:
             province.pop('id')
@@ -119,6 +119,8 @@ class Crawler:
             self.db.insert(collection='DXYProvince', data=province)
 
     def area_parser(self, area_information):
+        if area_information is None:
+            return
         area_information = json.loads(area_information.group(0))
         for area in area_information:
             area['comment'] = area['comment'].replace(' ', '')
@@ -131,6 +133,8 @@ class Crawler:
             self.db.insert(collection='DXYArea', data=area)
 
     def abroad_parser(self, abroad_information):
+        if abroad_information is None:
+            return
         countries = json.loads(abroad_information.group(0))
         for country in countries:
             country.pop('id')
@@ -151,6 +155,8 @@ class Crawler:
             self.db.insert(collection='DXYArea', data=country)
 
     def news_parser(self, news):
+        if news is None:
+            return
         news = json.loads(news.group(0))
         for _news in news:
             _news.pop('pubDateStr')
@@ -162,6 +168,8 @@ class Crawler:
             self.db.insert(collection='DXYNews', data=_news)
 
     def rumor_parser(self, rumor_information):
+        if rumor_information is None:
+            return
         rumor = rumor_information['data']
         for _rumor in rumor:
             if self.db.find_one(collection='DXYRumor', data=_rumor):
