@@ -1,7 +1,7 @@
 # 2019新型冠状病毒疫情实时爬虫
 
-![API](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)
-![license](https://img.shields.io/github/license/BlankerL/DXY-2019-nCoV-Crawler)
+[![API](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)](https://lab.isaaclin.cn/nCoV/)
+[![license](https://img.shields.io/github/license/BlankerL/DXY-2019-nCoV-Crawler)](https://github.com/BlankerL/DXY-2019-nCoV-Crawler/blob/master/LICENSE)
 
 本项目为2019新型冠状病毒（2019-nCoV）疫情状况的实时爬虫，数据来源为[丁香园](https://3g.dxy.cn/newh5/view/pneumonia)。
 
@@ -33,3 +33,4 @@ API：https://lab.isaaclin.cn/nCoV/
 全国各地的医疗资源都处于短缺的状态。如果希望捐赠的人，请移步各个红十字会或者官方认可的捐赠平台，他们能够更加妥善地运用这笔资金，帮助更有需要的人。
 
 **祝大家一切都好。**
+https://github.com/BlankerL/DXY-2019-nCoV-Crawler/blob/master/LICENSE
