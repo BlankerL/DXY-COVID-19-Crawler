@@ -20,6 +20,8 @@ API：http://lab.isaaclin.cn/nCoV/
 ## Demo
 1. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
    可视化效果：http://cuihuan.net/wuhan/news.html
+2. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
+   可视化效果：http://yiqing.ahusmart.com/
 
 ## 捐赠
 本项目不需要任何捐赠。
