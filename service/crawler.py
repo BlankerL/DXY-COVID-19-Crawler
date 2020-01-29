@@ -142,7 +142,8 @@ class Crawler:
         news = json.loads(news.group(0))
         for _news in news:
             _news.pop('pubDateStr')
-            if self.db.find_one(collection='DXYNews', data=_news):
+            sourceUrl = {"sourceUrl":_news["sourceUrl"]}
+            if self.db.find_one(collection='news', data=sourceUrl):
                 continue
             _news['crawlTime'] = self.crawl_timestamp
 
