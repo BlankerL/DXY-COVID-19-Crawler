@@ -1,4 +1,8 @@
 # 2019新型冠状病毒疫情实时爬虫
+
+![API](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)
+![license](https://img.shields.io/github/license/BlankerL/DXY-2019-nCoV-Crawler)
+
 本项目为2019新型冠状病毒（2019-nCoV）疫情状况的实时爬虫，数据来源为[丁香园](https://3g.dxy.cn/newh5/view/pneumonia)。
 
 感谢大家对本项目的支持，为了不让爬虫泛滥占用过多流量，导致其他更有需要的用户无法及时获取到丁香园的数据，请大家减少对爬虫的部署。
