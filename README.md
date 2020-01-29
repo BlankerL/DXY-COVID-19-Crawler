@@ -5,7 +5,7 @@
 
 我已经开放了一个API接口，其他人如果需要这份数据做其他的可视化，或者用作科研，可以直接查看并调用API来获取数据，把丁香园的流量让给更有需要的人。
 
-API：http://lab.isaaclin.cn/nCoV/
+API：https://lab.isaaclin.cn/nCoV/
 
 **本项目遵循MIT开源许可，同时，若引用本API，烦请在您的项目中声明引用。**
 
