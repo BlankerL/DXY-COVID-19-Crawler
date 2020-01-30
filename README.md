@@ -30,6 +30,7 @@ API：https://lab.isaaclin.cn/nCoV/
    可视化效果：http://cuihuan.net/wuhan/news.html
 2. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
    可视化效果：http://yiqing.ahusmart.com/
+3. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 
 ## 捐赠
 本项目不需要任何捐赠。
