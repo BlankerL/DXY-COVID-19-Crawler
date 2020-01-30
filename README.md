@@ -1,6 +1,7 @@
 # 2019新型冠状病毒疫情实时爬虫
 
-[![API](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)](https://lab.isaaclin.cn/nCoV/)
+[![API Status](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)](https://lab.isaaclin.cn/nCoV/)
+[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.count&url=https%3A%2F%2Flab.isaaclin.cn%2FnCoV%2Fapi%2Fusage)](https://lab.isaaclin.cn/nCoV/)
 [![license](https://img.shields.io/github/license/BlankerL/DXY-2019-nCoV-Crawler)](https://github.com/BlankerL/DXY-2019-nCoV-Crawler/blob/master/LICENSE)
 
 本项目为2019新型冠状病毒（2019-nCoV）疫情状况的实时爬虫，数据来源为[丁香园](https://3g.dxy.cn/newh5/view/pneumonia)。
@@ -10,7 +11,9 @@
 我已经开放了一个API接口，其他人如果需要这份数据做其他的可视化，或者用作科研，可以直接查看并调用API来获取数据，把丁香园的流量让给更有需要的人。
 
 API：https://lab.isaaclin.cn/nCoV/  
-为保证跨域请求能够正常进行，于2020年1月29日**切换至HTTPS协议**，若无法正常访问，请确认是否已经切换至HTTPS！
+注：
+1. **于2019年1月30日17:15开始统计API使用总人次，绝不统计单个IP的使用频率。**  
+2. 为保证跨域请求能够正常进行，于2020年1月29日**切换至HTTPS协议**，若无法正常访问，请确认是否已经切换至HTTPS！
 
 **本项目遵循MIT开源许可，同时，若引用本API，烦请在您的项目中声明引用。**
 
