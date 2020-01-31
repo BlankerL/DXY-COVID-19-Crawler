@@ -7,8 +7,9 @@
 from pymongo import MongoClient
 
 
-client = MongoClient('**Confidential**')
-db = client['2019-nCov']
+uri = '**Confidential**'
+client = MongoClient(uri)
+db = client['2019-nCoV']
 
 
 class DB:
