@@ -1,4 +1,4 @@
 [submodule "data"]
 	path = data
-	url = git@github.com:BlankerL/DXY-2019-nCoV-Data.git
+	url = https://github.com/BlankerL/DXY-2019-nCoV-Data.git
 	branch = master
