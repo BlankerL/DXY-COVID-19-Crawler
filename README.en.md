@@ -28,7 +28,7 @@ Recently, many college teachers and students contacted me,
 hoping to use these data for scientific research. 
 However, not everyone is familiar with the use of APIs and the format of JSON, 
 so I deployed a [data warehouse](https://github.com/BlankerL/DXY-2019-nCoV-Data) 
-to push the latest data in CSV format, which can be easily processed and loaded by most software.
+to publish the latest data in CSV format, which can be easily processed and loaded by most software.
 
 ## Description
 The deployed crawler will crawls the data every minutes, 
