@@ -1,8 +1,10 @@
 # 2019新型冠状病毒疫情实时爬虫
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)](https://lab.isaaclin.cn/nCoV/)
-[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Usage&query=%24.count&url=https%3A%2F%2Flab.isaaclin.cn%2FnCoV%2Fapi%2Fusage)](https://lab.isaaclin.cn/nCoV/)
+[![API Usage](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Call&query=%24.count&url=https%3A%2F%2Flab.isaaclin.cn%2FnCoV%2Fapi%2Fusage)](https://lab.isaaclin.cn/nCoV/)
 [![license](https://img.shields.io/github/license/BlankerL/DXY-2019-nCoV-Crawler)](https://github.com/BlankerL/DXY-2019-nCoV-Crawler/blob/master/LICENSE)
+
+简体中文 | [English](README.en.md)
 
 本项目为2019新型冠状病毒（2019-nCoV）疫情状况的实时爬虫，数据来源为[丁香园](https://3g.dxy.cn/newh5/view/pneumonia)。
 
@@ -28,7 +30,7 @@ API：https://lab.isaaclin.cn/nCoV/
 ## 项目介绍
 本项目每分钟访问并爬取一次数据，储存在MongoDB中，并且保存所有历史数据的更新，希望能够在未来回溯病情时能有所帮助。
 
-爬虫本身并不复杂，可以**移步上方API，查看本爬虫能够获取到的所有信息条目**。同时，为了减少请求频率，已经在一次请求的时候获取足够的信息，这样能把流量让给更有需要的人。
+爬虫本身并不复杂，可以**移步上方API，查看本爬虫能够获取到的所有信息条目**。
 
 ## 数据异常
 目前发现浙江省/湖北省部分时间序列数据存在数据异常，可能的原因是丁香园数据为人工录入，某些数据可能录入错误，比如某一次爬虫获取的浙江省治愈人数为537人，数分钟后被修改回正常人数。
