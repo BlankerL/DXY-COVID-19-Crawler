@@ -44,6 +44,9 @@ API：https://lab.isaaclin.cn/nCoV/
    可视化效果：http://yiqing.ahusmart.com/
 3. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 
+## Reference
+由于API部署在香港，入境速率受限，如果您仅希望通过本API在网页端实现实时数据可视化，可以参考[shfshanyue/2019-ncov](https://github.com/shfshanyue/2019-ncov)项目。该项目能够在网页后端每隔30分钟自动运行爬虫，获取最新数据，并渲染在前端直接返回，不会受到API数据返回速度的影响。
+
 ## 捐赠
 本项目不需要任何捐赠。
 
