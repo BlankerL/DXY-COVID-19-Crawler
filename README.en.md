@@ -47,6 +47,11 @@ Therefore, if you use the data for scientific research, please preprocess and cl
 In the meantime, I opened an [issue](https://github.com/BlankerL/DXY-2019-nCoV-Crawler/issues/34) 
 for you to report the potential noise data. I will check and remove them periodically. 
 
+## Reference
+1. If you would like to analyze the data with [R](https://www.r-project.org/),
+you can refer to [pzhaonet/ncovr](https://github.com/pzhaonet/ncovr).
+This project will help you to directly load data into R from either GitHub Data Warehouse or API. 
+
 ## Demonstration
 1. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
    Visualization: http://cuihuan.net/wuhan/news.html

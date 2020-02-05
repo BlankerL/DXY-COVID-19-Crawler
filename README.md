@@ -37,15 +37,16 @@ API：https://lab.isaaclin.cn/nCoV/
 
 本项目爬虫仅从丁香园公开的数据中获取并储存数据，并不会对异常值进行判断和处理，因此如果将本数据用作科研目的，请自己对数据进行清洗。同时，我已经在Issue中开放了[异常数据反馈通道](https://github.com/BlankerL/DXY-2019-nCoV-Crawler/issues/34)，可以直接在此问题中反馈潜在的异常数据，我会定期检查并处理。
 
+## Reference
+1. 如果您仅希望通过本API在网页端实现实时数据可视化，可以参考[shfshanyue/2019-ncov](https://github.com/shfshanyue/2019-ncov)项目。该项目能够在网页后端每隔30分钟自动运行爬虫，获取最新数据，并渲染在前端直接返回，不会受到API数据返回速度的影响。
+2. 如果您希望使用R语言对数据进行分析，可以参考[pzhaonet/ncovr](https://github.com/pzhaonet/ncovr)项目，该项目整合通过GitHub数据仓库/API数据提取两种模式。
+
 ## Demo
 1. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
    可视化效果：http://cuihuan.net/wuhan/news.html
 2. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
    可视化效果：http://yiqing.ahusmart.com/
 3. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
-
-## Reference
-由于API部署在香港，入境速率受限，如果您仅希望通过本API在网页端实现实时数据可视化，可以参考[shfshanyue/2019-ncov](https://github.com/shfshanyue/2019-ncov)项目。该项目能够在网页后端每隔30分钟自动运行爬虫，获取最新数据，并渲染在前端直接返回，不会受到API数据返回速度的影响。
 
 ## 捐赠
 本项目不需要任何捐赠。
