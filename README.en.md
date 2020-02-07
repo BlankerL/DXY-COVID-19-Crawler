@@ -53,11 +53,13 @@ you can refer to [pzhaonet/ncovr](https://github.com/pzhaonet/ncovr).
 This project will help you to directly load data into R from either GitHub Data Warehouse or API. 
 
 ## Demonstration
-1. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
+1. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)  
+   Website: https://ncov2020.org
+2. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
    Visualization: http://cuihuan.net/wuhan/news.html
-2. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
+3. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
    Visualization: http://yiqing.ahusmart.com/
-3. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+4. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 
 ## Donation
 No donation is needed. 

@@ -42,11 +42,13 @@ API：https://lab.isaaclin.cn/nCoV/
 2. 如果您希望使用R语言对数据进行分析，可以参考[pzhaonet/ncovr](https://github.com/pzhaonet/ncovr)项目，该项目整合通过GitHub数据仓库/API数据提取两种模式。
 
 ## Demo
-1. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
+1. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)  
+   网站：https://ncov2020.org
+2. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
    可视化效果：http://cuihuan.net/wuhan/news.html
-2. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
+3. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
    可视化效果：http://yiqing.ahusmart.com/
-3. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+4. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 
 ## 捐赠
 本项目不需要任何捐赠。
