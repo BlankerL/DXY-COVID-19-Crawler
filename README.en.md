@@ -59,7 +59,9 @@ This project will help you to directly load data into R from either GitHub Data 
    Visualization: http://cuihuan.net/wuhan/news.html
 3. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
    Visualization: http://yiqing.ahusmart.com/
-4. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+4. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)  
+   Visualization: https://2019-ncov-trends.tk/
+5. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 
 ## Donation
 No donation is needed. 
