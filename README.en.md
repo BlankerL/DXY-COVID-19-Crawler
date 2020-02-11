@@ -62,6 +62,7 @@ This project will help you to directly load data into R from either GitHub Data 
 4. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)  
    Visualization: https://2019-ncov-trends.tk/
 5. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+6. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
 
 ## Donation
 No donation is needed. 
