@@ -16,7 +16,8 @@ such that other users in need cannot get the data in time.
 I prepared an API for you to make visualizations and analysis, 
 which is for free and does not have any limitation in using. 
 
-API：https://lab.isaaclin.cn/nCoV/  
+API：https://lab.isaaclin.cn/nCoV/en  
+Remarks:  
 **Begining at 17: 15 on January 30, 2019, the number of API calls is counted. 
 But the frequency of API called from single IP will never be recorded.**
 
