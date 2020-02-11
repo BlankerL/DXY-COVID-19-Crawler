@@ -1,12 +1,12 @@
-# 2019-nCoV Infection Data Realtime Crawler
+# COVID-19 Infection Data Realtime Crawler
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)](https://lab.isaaclin.cn/nCoV/)
 [![API Call](https://img.shields.io/badge/dynamic/json?color=orange&label=API%20Call&query=%24.count&url=https%3A%2F%2Flab.isaaclin.cn%2FnCoV%2Fapi%2Fusage)](https://lab.isaaclin.cn/nCoV/)
-[![license](https://img.shields.io/github/license/BlankerL/DXY-2019-nCoV-Crawler)](https://github.com/BlankerL/DXY-2019-nCoV-Crawler/blob/master/LICENSE)
+[![license](https://img.shields.io/github/license/BlankerL/DXY-COVID-19-Crawler)](https://github.com/BlankerL/DXY-COVID-19-Crawler/blob/master/LICENSE)
 
 [简体中文](README.md) | English
 
-2019-nCoV infection data realtime crawler, 
+COVID-19/2019-nCoV infection data realtime crawler, 
 the data source is [Ding Xiang Yuan](https://3g.dxy.cn/newh5/view/pneumonia).
 
 Please reduce the deployment of crawlers in order to prevent the crawlers 
@@ -18,8 +18,10 @@ which is for free and does not have any limitation in using.
 
 API：https://lab.isaaclin.cn/nCoV/en  
 Remarks:  
-**Begining at 17: 15 on January 30, 2019, the number of API calls is counted. 
-But the frequency of API called from single IP will never be recorded.**
+1. Begining at 17: 15 on January 30, 2019, the number of API calls is counted. 
+But the frequency of API called from single IP will never be recorded.
+2. WHO named the coronavirus as COVID-19 on February 11, 2020. 
+For the consistency of the API usage, it will be remained as `nCoV`.
 
 **This project is subject to the MIT open source license. 
 If you use the API, please declare the reference in your project.**
@@ -28,7 +30,7 @@ If you use the API, please declare the reference in your project.**
 Recently, many college teachers and students contacted me, 
 hoping to use these data for scientific research. 
 However, not everyone is familiar with the use of APIs and the format of JSON, 
-so I deployed a [data warehouse](https://github.com/BlankerL/DXY-2019-nCoV-Data) 
+so I deployed a [data warehouse](https://github.com/BlankerL/DXY-COVID-19-Data) 
 to publish the latest data in CSV format, which can be easily processed and loaded by most software.
 
 ## Description
@@ -45,7 +47,7 @@ The possible reason is the manually processed data were recorded by mistake.
 The crawler just crawl what it sees, do not deal with any noise data. 
 Therefore, if you use the data for scientific research, please preprocess and clean the data properly. 
 
-In the meantime, I opened an [issue](https://github.com/BlankerL/DXY-2019-nCoV-Crawler/issues/34) 
+In the meantime, I opened an [issue](https://github.com/BlankerL/DXY-COVID-19-Crawler/issues/34) 
 for you to report the potential noise data. I will check and remove them periodically. 
 
 ## Reference
