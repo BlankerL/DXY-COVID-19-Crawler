@@ -55,6 +55,10 @@ for you to report the potential noise data. I will check and remove them periodi
 you can refer to [pzhaonet/ncovr](https://github.com/pzhaonet/ncovr).
 This project will help you to directly load data into R from either GitHub Data Warehouse or API. 
 
+## Research
+All scientific research results are for reference only.
+1. [yijunwang0805/YijunWang](https://github.com/yijunwang0805/YijunWang)
+
 ## Demonstration
 1. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)  
    Website: https://ncov2020.org

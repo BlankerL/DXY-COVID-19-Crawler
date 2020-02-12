@@ -42,6 +42,10 @@ API：https://lab.isaaclin.cn/nCoV/zh
 1. 如果您仅希望通过本API在网页端实现实时数据可视化，可以参考[shfshanyue/2019-ncov](https://github.com/shfshanyue/2019-ncov)项目。该项目能够在网页后端每隔30分钟自动运行爬虫，获取最新数据，并渲染在前端直接返回，不会受到API数据返回速度的影响。
 2. 如果您希望使用R语言对数据进行分析，可以参考[pzhaonet/ncovr](https://github.com/pzhaonet/ncovr)项目，该项目整合通过GitHub数据仓库/API数据提取两种模式。
 
+## Research
+所有研究结果均仅作为参考。
+1. [yijunwang0805/YijunWang](https://github.com/yijunwang0805/YijunWang)  
+
 ## Demo
 1. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)  
    网站：https://ncov2020.org
