@@ -60,16 +60,18 @@ All scientific research results are for reference only.
 1. [yijunwang0805/YijunWang](https://github.com/yijunwang0805/YijunWang)
 
 ## Demonstration
-1. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)  
+1. Website: https://ncov.deepeye.tech/  
+   Time-series data visualization.
+2. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)  
    Website: https://ncov2020.org
-2. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
+3. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
    Visualization: http://cuihuan.net/wuhan/news.html
-3. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
+4. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
    Visualization: http://yiqing.ahusmart.com/
-4. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)  
+5. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)  
    Visualization: https://2019-ncov-trends.tk/
-5. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
-6. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
+6. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+7. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
 
 ## Donation
 No donation is needed. 
