@@ -75,7 +75,5 @@ All scientific research results are for reference only.
 No donation is needed. 
 
 Medical resources are in short supply throughout mainland China. 
-If you want to donate, please move to Red Cross or officially recognized donation platforms, 
-they can make better use of the funds or supplies to help those in need.
 
 **Wish you all the best.**
