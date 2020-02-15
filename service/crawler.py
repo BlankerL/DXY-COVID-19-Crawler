@@ -6,7 +6,7 @@
 """
 from bs4 import BeautifulSoup
 from service.db import DB
-from service.countryTypeMap import country_type
+from service.nameMap import country_type_map, city_name_map
 import re
 import json
 import time
@@ -103,8 +103,9 @@ class Crawler:
             province['comment'] = province['comment'].replace(' ', '')
             if self.db.find_one(collection='DXYProvince', data=province):
                 continue
+            province['provinceEnglishName'] = city_name_map[province['provinceShortName']]['engName']
             province['crawlTime'] = self.crawl_timestamp
-            province['country'] = country_type.get(province['countryType'])
+            province['country'] = country_type_map.get(province['countryType'])
 
             self.db.insert(collection='DXYProvince', data=province)
 
@@ -115,6 +116,16 @@ class Crawler:
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
             area['country'] = '中国'
+            area['provinceEnglishName'] = city_name_map[area['provinceShortName']]['engName']
+            for city in area['cities']:
+                if city['cityName'] != '待明确地区':
+                    try:
+                        city['cityEnglishName'] = city_name_map[area['provinceShortName']]['cities'][city['cityName']]
+                    except KeyError:
+                        print(area['provinceShortName'], city['cityName'])
+                        pass
+                else:
+                    city['cityEnglishName'] = 'Area not defined'
             area['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYArea', data=area)
