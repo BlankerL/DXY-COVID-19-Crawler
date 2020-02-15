@@ -89,6 +89,7 @@ class Crawler:
         overall_information.pop('imgUrl')
         overall_information.pop('deleted')
         overall_information['countRemark'] = overall_information['countRemark'].replace(' 疑似', '，疑似').replace(' 治愈', '，治愈').replace(' 死亡', '，死亡').replace(' ', '')
+
         if not self.db.find_one(collection='DXYOverall', data=overall_information):
             overall_information['updateTime'] = self.crawl_timestamp
 
@@ -101,8 +102,10 @@ class Crawler:
             province.pop('tags')
             province.pop('sort')
             province['comment'] = province['comment'].replace(' ', '')
+
             if self.db.find_one(collection='DXYProvince', data=province):
                 continue
+
             province['provinceEnglishName'] = city_name_map[province['provinceShortName']]['engName']
             province['crawlTime'] = self.crawl_timestamp
             province['country'] = country_type_map.get(province['countryType'])
@@ -113,10 +116,16 @@ class Crawler:
         area_information = json.loads(area_information.group(0))
         for area in area_information:
             area['comment'] = area['comment'].replace(' ', '')
+
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
-            area['country'] = '中国'
+
+            area['countryName'] = '中国'
+            area['countryEnglishName'] = 'China'
+            area['continentName'] = '亚洲'
+            area['continentEnglishName'] = 'Asia'
             area['provinceEnglishName'] = city_name_map[area['provinceShortName']]['engName']
+
             for city in area['cities']:
                 if city['cityName'] != '待明确地区':
                     try:
@@ -126,6 +135,7 @@ class Crawler:
                         pass
                 else:
                     city['cityEnglishName'] = 'Area not defined'
+
             area['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYArea', data=area)
@@ -137,17 +147,21 @@ class Crawler:
             country.pop('tags')
             country.pop('countryType')
             country.pop('provinceId')
-            country['countryName'] = country.get('provinceName')
-            country['provinceShortName'] = country.get('provinceName')
             country.pop('cityName')
             country.pop('sort')
 
             country['comment'] = country['comment'].replace(' ', '')
+
             if self.db.find_one(collection='DXYArea', data=country):
                 continue
+
+            country['continentName'] = country.pop('continents')
+            country['countryName'] = country.get('provinceName')
+            country['provinceShortName'] = country.get('provinceName')
+            country['continentEnglishName'] = continent_name_map.get(country['continentName'])
             country['countryEnglishName'] = country_name_map.get(country['countryName'])
             country['provinceEnglishName'] = country_name_map.get(country['countryName'])
-            country['continentEnglishName'] = continent_name_map.get(country['continents'])
+
             country['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYArea', data=country)
