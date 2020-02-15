@@ -117,8 +117,15 @@ class Crawler:
         for area in area_information:
             area['comment'] = area['comment'].replace(' ', '')
 
+            # Because the cities are given other attributes,
+            # this part should not be used when checking the identical document.
+            cities_backup = area.pop('cities')
+
             if self.db.find_one(collection='DXYArea', data=area):
                 continue
+
+            # If this document is not in current database, insert this attribute back to the document.
+            area['cities'] = cities_backup
 
             area['countryName'] = '中国'
             area['countryEnglishName'] = 'China'
@@ -149,13 +156,16 @@ class Crawler:
             country.pop('provinceId')
             country.pop('cityName')
             country.pop('sort')
+            # The original provinceShortName are blank string
+            country.pop('provinceShortName')
+            # Rename the key continents to continentName
+            country['continentName'] = country.pop('continents')
 
             country['comment'] = country['comment'].replace(' ', '')
 
             if self.db.find_one(collection='DXYArea', data=country):
                 continue
 
-            country['continentName'] = country.pop('continents')
             country['countryName'] = country.get('provinceName')
             country['provinceShortName'] = country.get('provinceName')
             country['continentEnglishName'] = continent_name_map.get(country['continentName'])
