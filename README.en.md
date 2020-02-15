@@ -18,9 +18,11 @@ which is for free and does not have any limitation in using.
 
 API：https://lab.isaaclin.cn/nCoV/en  
 Remarks:  
-1. Begining at 17: 15 on January 30, 2019, the number of API calls is counted. 
+1. **The API will return both Chinese and English version of city names.**
+For more information, please refer to [Issue #61](https://github.com/BlankerL/DXY-COVID-19-Crawler/issues/61).
+2. Begining at 17: 15 on January 30, 2019, the number of API calls is counted. 
 But the frequency of API called from single IP will never be recorded.
-2. WHO named the coronavirus as COVID-19 on February 11, 2020. 
+3. WHO named the coronavirus as COVID-19 on February 11, 2020. 
 For the consistency of the API usage, it will be remained as `nCoV`.
 
 **This project is subject to the MIT open source license. 
