@@ -624,13 +624,22 @@ city_name_map = {
         }
     },
     '香港': {
-        'engName': 'Hong Kong'
+        'engName': 'Hong Kong',
+        'cities': {
+            '香港': 'Hong Kong'
+        }
     },
     '澳门': {
-        'engName': 'Macau'
+        'engName': 'Macau',
+        'cities': {
+            '澳门': 'Macau'
+        }
     },
     '台湾': {
-        'engName': 'Tai Wan'
+        'engName': 'Taiwan',
+        'cities': {
+            '台湾': 'Taiwan'
+        }
     }
 }
 
