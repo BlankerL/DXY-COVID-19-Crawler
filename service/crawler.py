@@ -6,7 +6,7 @@
 """
 from bs4 import BeautifulSoup
 from service.db import DB
-from service.nameMap import country_type_map, city_name_map
+from service.nameMap import country_type_map, city_name_map, country_name_map, continent_name_map
 import re
 import json
 import time
@@ -137,7 +137,7 @@ class Crawler:
             country.pop('tags')
             country.pop('countryType')
             country.pop('provinceId')
-            country['country'] = country.get('provinceName')
+            country['countryName'] = country.get('provinceName')
             country['provinceShortName'] = country.get('provinceName')
             country.pop('cityName')
             country.pop('sort')
@@ -145,6 +145,9 @@ class Crawler:
             country['comment'] = country['comment'].replace(' ', '')
             if self.db.find_one(collection='DXYArea', data=country):
                 continue
+            country['countryEnglishName'] = country_name_map.get(country['countryName'])
+            country['provinceEnglishName'] = country_name_map.get(country['countryName'])
+            country['continentEnglishName'] = continent_name_map.get(country['continents'])
             country['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYArea', data=country)
