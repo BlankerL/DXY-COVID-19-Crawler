@@ -497,7 +497,7 @@ city_name_map = {
         }
     },
     '陕西': {
-        'engName': 'Shanxi',
+        'engName': 'Shaanxi',
         'cities': {
             '咸阳': 'Xianyang',
             '商洛': 'Shangluo',
