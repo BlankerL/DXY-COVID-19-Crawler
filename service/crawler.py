@@ -53,11 +53,11 @@ class Crawler:
             if not overall_information or not province_information or not area_information or not news:
                 continue
 
-            #self.overall_parser(overall_information=overall_information)
-            #self.province_parser(province_information=province_information)
-            #self.area_parser(area_information=area_information)
-            #self.abroad_parser(abroad_information=abroad_information)
-            #self.news_parser(news=news)
+            self.overall_parser(overall_information=overall_information)
+            self.province_parser(province_information=province_information)
+            self.area_parser(area_information=area_information)
+            self.abroad_parser(abroad_information=abroad_information)
+            self.news_parser(news=news)
 
             break
 
