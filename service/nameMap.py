@@ -640,10 +640,17 @@ city_name_map = {
         'cities': {
             '台湾': 'Taiwan'
         }
+    },
+    '钻石公主号邮轮': {
+        'engName': 'Diamond Princess Cruise Ship',
+        'cities': {
+            '钻石公主号邮轮': 'Diamond Princess Cruise Ship'
+        }
     }
 }
 
 country_name_map = {
+    '钻石公主号邮轮': 'Diamond Princess Cruise Ship',
     '安哥拉': 'Angola',
     '阿富汗': 'Afghanistan',
     '阿尔巴尼亚': 'Albania',
@@ -844,5 +851,6 @@ continent_name_map = {
     '南美洲': 'South America',
     '非洲': 'Africa',
     '大洋洲': 'Oceania',
-    '南极洲': 'Antarctica'
+    '南极洲': 'Antarctica',
+    '其他': 'Others'
 }
