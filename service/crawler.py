@@ -49,6 +49,7 @@ class Crawler:
             area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
             abroad_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
             news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService'})))
+            rumors = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getIndexRumorList'})))
 
             if not overall_information or not province_information or not area_information or not news:
                 continue
@@ -58,26 +59,9 @@ class Crawler:
             self.area_parser(area_information=area_information)
             self.abroad_parser(abroad_information=abroad_information)
             self.news_parser(news=news)
+            self.rumor_parser(rumors=rumors)
 
             break
-
-        while True:
-            self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
-            try:
-                r = self.session.get(url='https://file1.dxycdn.com/2020/0130/454/3393874921745912507-115.json')
-            except requests.exceptions.ChunkedEncodingError:
-                continue
-            # Use try-except to ensure the .json() method will not raise exception.
-            try:
-                if r.status_code != 200:
-                    continue
-                elif r.json().get('code') == 'success':
-                    self.rumor_parser(rumors=r.json().get('data'))
-                    break
-                else:
-                    continue
-            except json.decoder.JSONDecodeError:
-                continue
 
         logger.info('Successfully crawled.')
 
@@ -196,6 +180,7 @@ class Crawler:
             self.db.insert(collection='DXYNews', data=_news)
 
     def rumor_parser(self, rumors):
+        rumors = json.loads(rumors.group(0))
         for rumor in rumors:
             rumor.pop('score')
             rumor['body'] = rumor['body'].replace(' ', '')
