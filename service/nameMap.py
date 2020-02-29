@@ -252,7 +252,8 @@ city_name_map = {
             '绍兴': 'Shaoxing',
             '舟山': 'Zhoushan',
             '衢州': 'Quzhou',
-            '金华': 'Jinhua'
+            '金华': 'Jinhua',
+            '省十里丰监狱': 'Shilifeng Prison'
         }
     },
     '内蒙古': {
