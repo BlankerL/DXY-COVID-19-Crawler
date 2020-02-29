@@ -39,12 +39,12 @@ class Crawler:
         while True:
             self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
             try:
-                r = self.session.get(url='https://3g.dxy.cn/newh5/view/pneumonia')
+                r = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
             except requests.exceptions.ChunkedEncodingError:
                 continue
             soup = BeautifulSoup(r.content, 'lxml')
 
-            overall_information = re.search(r'\{("id".*?)\]\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
+            overall_information = re.search(r'(\{"id".*\}\})\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
             province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
             area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
             abroad_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
@@ -66,7 +66,7 @@ class Crawler:
         logger.info('Successfully crawled.')
 
     def overall_parser(self, overall_information):
-        overall_information = json.loads(overall_information.group(0))
+        overall_information = json.loads(overall_information.group(1))
         overall_information.pop('id')
         overall_information.pop('createTime')
         overall_information.pop('modifyTime')
