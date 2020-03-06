@@ -832,7 +832,7 @@ country_name_map = {
     '乌干达': 'Uganda',
     '乌克兰': 'Ukraine',
     '阿拉伯联合酋长国': 'United Arab Emirates',
-    '英国': 'United Kiongdom',
+    '英国': 'United Kingdom',
     '美国': 'United States of America',
     '乌拉圭': 'Uruguay',
     '乌兹别克斯坦': 'Uzbekistan',
