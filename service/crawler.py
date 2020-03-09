@@ -6,10 +6,12 @@
 """
 from bs4 import BeautifulSoup
 from service.db import DB
+from service.userAgent import user_agent_list
 from service.nameMap import country_type_map, city_name_map, country_name_map, continent_name_map
 import re
 import json
 import time
+import random
 import logging
 import datetime
 import requests
@@ -18,15 +20,10 @@ import requests
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 logger = logging.getLogger(__name__)
 
-headers = {
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
-}
-
 
 class Crawler:
     def __init__(self):
         self.session = requests.session()
-        self.session.headers.update(headers)
         self.db = DB()
         self.crawl_timestamp = int()
 
@@ -37,6 +34,11 @@ class Crawler:
 
     def crawler(self):
         while True:
+            self.session.headers.update(
+                {
+                    'user-agent': random.choice(user_agent_list)
+                }
+            )
             self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
             try:
                 r = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
