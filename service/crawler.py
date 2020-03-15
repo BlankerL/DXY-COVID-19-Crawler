@@ -49,7 +49,7 @@ class Crawler:
             if overall_information:
                 self.overall_parser(overall_information=overall_information)
 
-            province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1'})))
+            province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1undefined'})))
             if province_information:
                 self.province_parser(province_information=province_information)
 
@@ -57,11 +57,11 @@ class Crawler:
             if area_information:
                 self.area_parser(area_information=area_information)
 
-            abroad_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService2'})))
+            abroad_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService2true'})))
             if abroad_information:
                 self.abroad_parser(abroad_information=abroad_information)
 
-            news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService'})))
+            news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService2'})))
             if news:
                 self.news_parser(news=news)
 
@@ -150,27 +150,29 @@ class Crawler:
     def abroad_parser(self, abroad_information):
         countries = json.loads(abroad_information.group(0))
         for country in countries:
-            country.pop('id')
-            country.pop('tags')
+            try:
+                country.pop('id')
+                country.pop('tags')
+                country.pop('sort')
+                # Ding Xiang Yuan have a large number of duplicates,
+                # values are all the same, but the modifyTime are different.
+                # I suppose the modifyTime is modification time for all documents, other than for only this document.
+                # So this field will be popped out.
+                country.pop('modifyTime')
+                # createTime is also different even if the values are same.
+                # Originally, the createTime represent the first diagnosis of the virus in this area,
+                # but it seems different for abroad information.
+                country.pop('createTime')
+                country['comment'] = country['comment'].replace(' ', '')
+            except KeyError:
+                pass
             country.pop('countryType')
             country.pop('provinceId')
             country.pop('cityName')
-            country.pop('sort')
             # The original provinceShortName are blank string
             country.pop('provinceShortName')
             # Rename the key continents to continentName
             country['continentName'] = country.pop('continents')
-            # Ding Xiang Yuan have a large number of duplicates,
-            # values are all the same, but the modifyTime are different.
-            # I suppose the modifyTime is modification time for all documents, other than for only this document.
-            # So this field will be popped out.
-            country.pop('modifyTime')
-            # createTime is also different even if the values are same.
-            # Originally, the createTime represent the first diagnosis of the virus in this area,
-            # but it seems different for abroad information.
-            country.pop('createTime')
-
-            country['comment'] = country['comment'].replace(' ', '')
 
             if self.db.find_one(collection='DXYArea', data=country):
                 continue
