@@ -72,8 +72,10 @@ All scientific research results are for reference only.
    Visualization: http://yiqing.ahusmart.com/
 5. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)  
    Visualization: https://2019-ncov-trends.tk/
-6. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
-7. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
+6. [quadpixels/quadpixels.github.io](https://github.com/quadpixels/quadpixels.github.io)
+   Visualization: https://quadpixels.github.io/
+7. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+8. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
 
 ## Donation
 No donation is needed. 
