@@ -849,7 +849,7 @@ country_name_map = {
     '安道尔': 'Andorra',
     '多米尼加': 'Dominican Republic',
     '塞尔维亚': 'Republic of Serbia',
-    '刚果（金）': 'Congo-Kinshasa',
+    '刚果（金）': 'Democratic Republic of the Congo',
     '巴勒斯坦': 'Palestine',
     '波黑': 'Bosnia and Herzegovina',
     '梵蒂冈': 'Status Civitatis Vaticanae',
