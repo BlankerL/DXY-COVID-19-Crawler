@@ -13,7 +13,6 @@ import json
 import time
 import random
 import logging
-import datetime
 import requests
 
 
@@ -39,7 +38,7 @@ class Crawler:
                     'user-agent': random.choice(user_agent_list)
                 }
             )
-            self.crawl_timestamp = int(datetime.datetime.timestamp(datetime.datetime.now()) * 1000)
+            self.crawl_timestamp = int(time.time() * 1000)
             try:
                 r = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
             except requests.exceptions.ChunkedEncodingError:
