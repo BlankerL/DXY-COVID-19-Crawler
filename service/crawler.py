@@ -66,7 +66,6 @@ class Crawler:
                 self.rumor_parser(rumors=rumors)
 
             if not overall_information or \
-                    not province_information or \
                     not area_information or \
                     not abroad_information or \
                     not news or \
