@@ -62,6 +62,7 @@ API：https://lab.isaaclin.cn/nCoV/zh
    可视化效果：https://quadpixels.github.io/
 7. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 8. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
+9. [中国疫情地图支持省市上钻下取](https://github.com/lzxue/yiqingditu)
 
 ## 捐赠
 本项目不需要任何捐赠。
