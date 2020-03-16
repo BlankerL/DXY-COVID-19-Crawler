@@ -49,10 +49,6 @@ class Crawler:
             if overall_information:
                 self.overall_parser(overall_information=overall_information)
 
-            province_information = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService1undefined'})))
-            if province_information:
-                self.province_parser(province_information=province_information)
-
             area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
             if area_information:
                 self.area_parser(area_information=area_information)
