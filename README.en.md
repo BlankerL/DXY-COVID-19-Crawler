@@ -76,6 +76,7 @@ All scientific research results are for reference only.
    Visualization: https://quadpixels.github.io/
 7. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 8. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
+9. [China NCOV Visualization Map ](https://github.com/lzxue/yiqingditu)
 
 ## Donation
 No donation is needed. 
