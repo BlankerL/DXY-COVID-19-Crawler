@@ -57,9 +57,13 @@ class Crawler:
             if abroad_information:
                 self.abroad_parser(abroad_information=abroad_information)
 
-            news = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService2'})))
-            if news:
-                self.news_parser(news=news)
+            news_chinese = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineServiceundefined'})))
+            if news_chinese:
+                self.news_parser(news=news_chinese)
+
+            news_english = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService2'})))
+            if news_english:
+                self.news_parser(news=news_english)
 
             rumors = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getIndexRumorList'})))
             if rumors:
@@ -68,7 +72,8 @@ class Crawler:
             if not overall_information or \
                     not area_information or \
                     not abroad_information or \
-                    not news or \
+                    not news_chinese or \
+                    not news_english or \
                     not rumors:
                 time.sleep(3)
                 continue
