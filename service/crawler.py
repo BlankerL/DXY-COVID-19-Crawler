@@ -70,6 +70,7 @@ class Crawler:
                     not abroad_information or \
                     not news or \
                     not rumors:
+                time.sleep(3)
                 continue
 
             break
