@@ -22,7 +22,7 @@ Remarks:
 For more information, please refer to [Issue #61](https://github.com/BlankerL/DXY-COVID-19-Crawler/issues/61).
 2. **Due to the limitation of the server's bandwidth, starting from March 19, 2020, 
 `/nCoV/api/overall` and `/nCoV/api/area` do not response time-series data.
-You can fetch time-series data in [json](json) folder.
+You can fetch time-series data in [json](https://github.com/BlankerL/DXY-COVID-19-Data/tree/master/json) folder of the data warehouse.
 If you call the API with `latest=0`, please modify the request parameters, 
 otherwise, you do not need to do any modification.**
 
