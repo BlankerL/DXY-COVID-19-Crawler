@@ -3,6 +3,7 @@
 @FileName: crawler.py
 @Author: Jiabao Lin
 @Date: 2020/1/21
+@Contributors: WH-2099,
 """
 from bs4 import BeautifulSoup
 from service.db import DB
@@ -11,6 +12,7 @@ from service.nameMap import country_type_map, city_name_map, country_name_map, c
 import re
 import json
 import time
+import datetime
 import random
 import logging
 import requests
@@ -22,9 +24,10 @@ logger = logging.getLogger(__name__)
 
 class Crawler:
     def __init__(self):
-        self.session = requests.session()
+        self.session = requests.sessions.Session()
         self.db = DB()
         self.crawl_timestamp = int()
+        self.recordAMAPTime = datetime.datetime()
 
     def run(self):
         while True:
@@ -33,17 +36,36 @@ class Crawler:
 
     def crawler(self):
         while True:
-            self.session.headers.update(
-                {
+            self.session.headers.update({
                     'user-agent': random.choice(user_agent_list)
-                }
-            )
+                })
+            self.session
             self.crawl_timestamp = int(time.time() * 1000)
             try:
-                r = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
+                rDXY = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
             except requests.exceptions.ChunkedEncodingError:
                 continue
-            soup = BeautifulSoup(r.content, 'lxml')
+            finally:
+                rDXY.close()
+            soup = BeautifulSoup(rDXY.text, 'lxml')
+
+            #update data from AMAP every 30minutes(1800s)
+            if (self.recordAMAPTime - datetime.datetime.now()).seconds >= 1800:
+                AMAPurl = 'http://wb.amap.com/channel.php?aoscommon=1&callback=_aosJsonpRequest1&urlname=https%3A%2F%2Fm5.amap.com%2Fws%2Fshield%2Fsearch%2Fyiqing&param=%5B%7B%22user_loc%22%3A%22%22%2C%22sign%22%3A1%7D%2C%7B%22fromchannel%22%3A%22gaode%22%2C%22version%22%3A4%2C%22first_request%22%3A1%2C%22sign%22%3A0%7D%5D&method=get'
+                with self.session.get(AMAPurl) as rawStr: 
+                    rawStr = rAMAP.text
+                    jsonBegin = rawStr.find('{')
+                    jsonEnd = rawStr.rfind('}') + 1
+                    rawJson = rawStr[jsonBegin:jsonEnd]
+                    rawData = json.loads(rawJson)
+                    data = rawData['data']
+                    city_parser(data['citylist'])
+                    pois_parser(data['pois']['one']['poilist'] + \
+                                data['pois']['seven']['poilist'] + \
+                                data['pois']['fourteen']['poilist'] + \
+                                data['pois']['other']['poilist'])
+                    self.recordAMAPTime = datetime.datetime.now()
+            
 
             overall_information = re.search(r'(\{"id".*\}\})\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
             if overall_information:
@@ -208,6 +230,36 @@ class Crawler:
             rumor['crawlTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYRumors', data=rumor)
+
+
+
+    ### AMAP Parser
+    ###  considering that a lot of data is useless
+    ###  only select some
+    def city_parser(self, rawList):
+        for province in rawList:
+            cityInfo = {}
+            cityInfo['provinceName'] = province.get('name', None)
+            cityInfo['provinceId'] = province.get('id', None)
+            cityInfo['provinceTotal'] = province.get('total', None)
+            for city in province['list']:
+                cityInfo['cityName'] = city.get('name', None)
+                cityInfo['cityId'] = city.get('id', None)
+                cityInfo['cityLon'] = city.get('lon', None)
+                cityInfo['cityLat'] = city.get('lat', None)
+                cityInfo['cityLevel'] = city.get('level', None)
+                cityInfo['cityCount'] = city.get('count', None)
+                self.db.insert(collection='AMAPcity', data=cityInfo)
+
+    def pois_parser(self, rawList):
+        for poi in rawList:
+            poisInfo = {}
+            poisInfo['poiname'] = poi.get('poiname', None)
+            poisInfo['lat'] = poi.get('lat', None)
+            poisInfo['lon'] = poi.get('lon', None)
+            poisInfo['tag'] = poi.get('tag_display_std', None)
+            poisInfo['source'] = poi.get('source', None)
+            self.db.insert(collection='AMAPpois', data=poisInfo)
 
 
 if __name__ == '__main__':
