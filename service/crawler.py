@@ -52,7 +52,7 @@ class Crawler:
             #update data from AMAP every 30minutes(1800s)
             if (self.recordAMAPTime - datetime.datetime.now()).seconds >= 1800:
                 AMAPurl = 'http://wb.amap.com/channel.php?aoscommon=1&callback=_aosJsonpRequest1&urlname=https%3A%2F%2Fm5.amap.com%2Fws%2Fshield%2Fsearch%2Fyiqing&param=%5B%7B%22user_loc%22%3A%22%22%2C%22sign%22%3A1%7D%2C%7B%22fromchannel%22%3A%22gaode%22%2C%22version%22%3A4%2C%22first_request%22%3A1%2C%22sign%22%3A0%7D%5D&method=get'
-                with self.session.get(AMAPurl) as rawStr: 
+                with self.session.get(AMAPurl) as rAMAP: 
                     rawStr = rAMAP.text
                     jsonBegin = rawStr.find('{')
                     jsonEnd = rawStr.rfind('}') + 1
