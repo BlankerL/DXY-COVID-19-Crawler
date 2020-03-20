@@ -45,7 +45,7 @@ class Crawler:
                 continue
             soup = BeautifulSoup(r.content, 'lxml')
 
-            overall_information = re.search(r'(\{"id".*\}\})\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
+            overall_information = re.search(r'(\{"id".*\})\}', str(soup.find('script', attrs={'id': 'getStatisticsService'})))
             if overall_information:
                 self.overall_parser(overall_information=overall_information)
 
