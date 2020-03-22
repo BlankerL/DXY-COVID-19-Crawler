@@ -12,7 +12,7 @@
 
 我已经开放了一个API接口，其他人如果需要这份数据做其他的可视化，可以直接查看并调用API来获取数据，把丁香园的流量让给更有需要的人。
 
-API：https://lab.isaaclin.cn/nCoV/zh  
+API：https://lab.isaaclin.cn/nCoV  
 注：
 1. **API返回中英文城市名称。** 更多信息可以关注[Issue #61](https://github.com/BlankerL/DXY-COVID-19-Crawler/issues/61)。
 2. **受限于服务器带宽压力，自2020年3月19日起，API接口`/nCoV/api/overall`及`/nCoV/api/area`不再返回时间序列数据，时间序列数据可以在数据仓库的[json](https://github.com/BlankerL/DXY-COVID-19-Data/tree/master/json)文件夹下获取。如果您调用接口时使用了`latest=0`参数，则需要修改请求，否则无需修改。**

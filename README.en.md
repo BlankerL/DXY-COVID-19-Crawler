@@ -16,7 +16,7 @@ such that other users in need cannot get the data in time.
 I prepared an API for you to make visualizations and analysis, 
 which is for free and does not have any limitation in using. 
 
-API：https://lab.isaaclin.cn/nCoV/en  
+API：https://lab.isaaclin.cn/nCoV  
 Remarks:  
 1. **The API will return both Chinese and English version of city names.**
 For more information, please refer to [Issue #61](https://github.com/BlankerL/DXY-COVID-19-Crawler/issues/61).
