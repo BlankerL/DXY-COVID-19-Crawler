@@ -57,7 +57,7 @@ class Crawler:
             if abroad_information:
                 self.abroad_parser(abroad_information=abroad_information)
 
-            news_chinese = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineServiceundefined'})))
+            news_chinese = re.search(r'\[(.*?)\]', str(soup.find('script', attrs={'id': 'getTimelineService1'})))
             if news_chinese:
                 self.news_parser(news=news_chinese)
 
