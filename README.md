@@ -56,12 +56,14 @@ API：https://lab.isaaclin.cn/nCoV
    可视化效果：http://yiqing.ahusmart.com/
 5. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)  
    可视化效果：https://2019-ncov-trends.tk/
-6. [quadpixels/quadpixels.github.io](https://github.com/quadpixels/quadpixels.github.io)
+6. [quadpixels/quadpixels.github.io](https://github.com/quadpixels/quadpixels.github.io)  
    可视化效果：https://quadpixels.github.io/
-7. [lzxue/yiqingditu](https://github.com/lzxue/yiqingditu)
-  可视化效果：https://lzxue.github.io/yiqingditu/
-8. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
-9. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
+7. [lzxue/yiqingditu](https://github.com/lzxue/yiqingditu)  
+   可视化效果：https://lzxue.github.io/yiqingditu/
+8. [covid19viz/covid19viz.github.io](https://github.com/covid19viz/covid19viz.github.io)  
+   可视化效果：https://covid19viz.github.io/
+9. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+10. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
 
 ## 捐赠
 本项目不需要任何捐赠。
