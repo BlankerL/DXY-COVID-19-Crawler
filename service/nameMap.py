@@ -701,7 +701,7 @@ country_name_map = {
     '多米尼加共和国': 'Dominica Rep',
     '厄瓜多尔': 'Ecuador',
     '埃及': 'Egypt',
-    '萨尔瓦多': 'EI Salvador',
+    '萨尔瓦多': 'El Salvador',
     '爱沙尼亚': 'Estonia',
     '埃塞俄比亚': 'Ethiopia',
     '斐济': 'Fiji',
