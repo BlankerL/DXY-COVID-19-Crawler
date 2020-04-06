@@ -869,6 +869,7 @@ country_name_map = {
     '毛里塔尼亚': 'The Islamic Republic of Mauritania',
     '赤道几内亚': 'The Republic of Equatorial Guinea',
     '卢旺达': 'Republic of Rwanda',
+    '马恩岛': 'Isle of Man'
 }
 
 continent_name_map = {
