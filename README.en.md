@@ -79,8 +79,10 @@ All scientific research results are for reference only.
    Visualization: https://lzxue.github.io/yiqingditu/
 8. [covid19viz/covid19viz.github.io](https://github.com/covid19viz/covid19viz.github.io)  
    Visualization: https://covid19viz.github.io/
-9. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
-10. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
+9. [biluochun/data-ncov](https://github.com/biluochun/data-ncov)  
+   Visualization: https://biluochun.github.io/data-ncov/index.html
+10. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
+11. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
 
 ## Donation
 No donation is needed. 
