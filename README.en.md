@@ -37,8 +37,8 @@ so I deployed a [data warehouse](https://github.com/BlankerL/DXY-COVID-19-Data)
 to publish the latest data in CSV format, which can be easily processed and loaded by most software.
 
 ## Description
-The deployed crawler will crawls the data every minutes, 
-stores them into MongoDB, and saves all historical data updates. 
+The deployed crawler will crawl the data every minute, 
+store them into MongoDB, and save all historical data updates. 
 I hope it can be helpful in the future when backtracking the disease.
 
 The description of the attributes is listed in the [API page](https://lab.isaaclin.cn/nCoV/).  
