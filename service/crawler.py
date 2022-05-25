@@ -26,10 +26,13 @@ class Crawler:
         self.db = DB()
         self.crawl_timestamp = int()
 
+
     def run(self):
         while True:
             self.crawler()
+            break
             time.sleep(60)
+            
 
     def crawler(self):
         while True:
@@ -41,6 +44,7 @@ class Crawler:
             self.crawl_timestamp = int(time.time() * 1000)
             try:
                 r = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
+                r.encoding = 'utf-8'
             except requests.exceptions.ChunkedEncodingError:
                 continue
             soup = BeautifulSoup(r.content, 'lxml')
@@ -71,11 +75,13 @@ class Crawler:
 
             if not overall_information or \
                     not area_information or \
-                    not abroad_information or \
-                    not news_chinese or \
-                    not news_english or \
-                    not rumors:
+                    not abroad_information:
+                    # not abroad_information or \
+                    # not news_chinese or \
+                    # not news_english or \
+                    # not rumors:
                 time.sleep(3)
+                # 全都有数据才能停止，否则一直无线循环的爬
                 continue
 
             break
@@ -83,6 +89,7 @@ class Crawler:
         logger.info('Successfully crawled.')
 
     def overall_parser(self, overall_information):
+         # .group(0)==group() 表示所有的re结果，.group(1)表目标为第一个
         overall_information = json.loads(overall_information.group(1))
         overall_information.pop('id')
         overall_information.pop('createTime')
@@ -92,6 +99,7 @@ class Crawler:
         overall_information['countRemark'] = overall_information['countRemark'].replace(' 疑似', '，疑似').replace(' 治愈', '，治愈').replace(' 死亡', '，死亡').replace(' ', '')
 
         if not self.db.find_one(collection='DXYOverall', data=overall_information):
+            # find_one去重,如果数据库里面找到了这一条完全一样的信息，就停止爬取
             overall_information['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYOverall', data=overall_information)
