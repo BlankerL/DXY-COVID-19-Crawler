@@ -3,7 +3,13 @@
 @FileName: crawler.py
 @Author: Jiabao Lin
 @Date: 2020/1/21
+
+@modify by peikai li
+@ on Wed May 25 17:02:09 2022
 """
+import sys
+sys.path.append("../")
+
 from bs4 import BeautifulSoup
 from service.db import DB
 from service.userAgent import user_agent_list
@@ -53,10 +59,16 @@ class Crawler:
             if overall_information:
                 self.overall_parser(overall_information=overall_information)
 
+            # 国内
             area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
             if area_information:
                 self.area_parser(area_information=area_information)
 
+            area_fetchRecentStatV2 = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'fetchRecentStatV2'})))
+            if area_fetchRecentStatV2:
+                self.area_fetch_parser(area_fetchRecentStatV2=area_fetchRecentStatV2)
+    
+            # 国外
             abroad_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getListByCountryTypeService2true'})))
             if abroad_information:
                 self.abroad_parser(abroad_information=abroad_information)
@@ -89,7 +101,7 @@ class Crawler:
         logger.info('Successfully crawled.')
 
     def overall_parser(self, overall_information):
-         # .group(0)==group() 表示所有的re结果，.group(1)表目标为第一个
+          # .group(0)==group() 表示所有的re结果，.group(1)表目标为第一个
         overall_information = json.loads(overall_information.group(1))
         overall_information.pop('id')
         overall_information.pop('createTime')
@@ -121,7 +133,70 @@ class Crawler:
 
             self.db.insert(collection='DXYProvince', data=province)
 
+
+    def area_fetch_parser(self,area_fetchRecentStatV2):
+        """
+        无症状感染者
+    
+        Parameters
+        ----------
+        area_information : TYPE
+            DESCRIPTION.
+    
+        Returns
+        -------
+        None.
+    
+        """
+        area_information = json.loads(area_fetchRecentStatV2.group(0))
+        for area in area_information:
+            # 遍历所有地区
+            
+            # Because the cities are given other attributes,
+            # this part should not be used when checking the identical document.
+            cities_backup = area.pop('cities')
+    
+            if self.db.find_one(collection='DXYArea_f', data=area):
+                continue
+    
+            # If this document is not in current database, insert this attribute back to the document.
+            area['cities'] = cities_backup
+    
+            area['countryName'] = '中国'
+            area['countryEnglishName'] = 'China'
+            area['continentName'] = '亚洲'
+            area['continentEnglishName'] = 'Asia'
+            area['provinceEnglishName'] = city_name_map[area['provinceShortName']]['engName']
+    
+            for city in area['cities']:
+                if city['cityName'] != '待明确地区':
+                    try:
+                        city['cityEnglishName'] = city_name_map[area['provinceShortName']]['cities'][city['cityName']]
+                    except KeyError:
+                        print(area['provinceShortName'], city['cityName'])
+                        pass
+                else:
+                    city['cityEnglishName'] = 'Area not defined'
+    
+            area['updateTime'] = self.crawl_timestamp
+    
+            self.db.insert(collection='DXYArea_f', data=area)
+            
+            
     def area_parser(self, area_information):
+        """
+        核心变量
+
+        Parameters
+        ----------
+        area_information : TYPE
+            DESCRIPTION.
+
+        Returns
+        -------
+        None.
+
+        """
         area_information = json.loads(area_information.group(0))
         for area in area_information:
             area['comment'] = area['comment'].replace(' ', '')

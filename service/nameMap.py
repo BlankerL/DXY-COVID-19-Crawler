@@ -362,7 +362,8 @@ city_name_map = {
             '秦皇岛': 'Qinhuangdao',
             '衡水': 'Hengshui',
             '邢台': 'Xingtai',
-            '邯郸': 'Handan'
+            '邯郸': 'Handan',
+            '雄安新区': "Xiong'an New Area"
         }
     },
     '贵州': {
@@ -486,6 +487,7 @@ city_name_map = {
         'cities': {
             '吉林市': 'Jilin',
             '四平市': 'Siping',
+            '四平': 'Siping',
             '延边': 'Yanbian',
             '松原': 'Songyuan',
             '白城': 'Baicheng',
@@ -533,6 +535,7 @@ city_name_map = {
             '武清区': 'Wuqing District',
             '津南区': 'Jinnan District',
             '红桥区': 'Hongqiao District',
+            '静海区': 'Jinghai District'
         }
     },
     '湖南': {
