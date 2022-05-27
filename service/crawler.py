@@ -22,22 +22,25 @@ import logging
 import requests
 
 
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
 logger = logging.getLogger(__name__)
 
 
 class Crawler:
-    def __init__(self):
+    def __init__(self, just_run_once = True):
         self.session = requests.session()
         self.db = DB()
         self.crawl_timestamp = int()
+        self.just_run_once = just_run_once
 
 
     def run(self):
         while True:
             self.crawler()
-            break
-            time.sleep(60)
+            if self.just_run_once:
+                break
+            time.sleep(21600) # 6 hour 爬取一次
             
 
     def crawler(self):
@@ -87,6 +90,7 @@ class Crawler:
 
             if not overall_information or \
                     not area_information or \
+                    not area_fetchRecentStatV2 or\
                     not abroad_information:
                     # not abroad_information or \
                     # not news_chinese or \

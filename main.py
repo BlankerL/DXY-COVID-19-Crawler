@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 @ProjectName: DXY-2019-nCoV-Crawler
 @FileName: main.py
@@ -11,5 +12,5 @@ from service.crawler import Crawler
 
 
 if __name__ == '__main__':
-    crawler = Crawler()
+    crawler = Crawler(just_run_once = False)
     crawler.run()
