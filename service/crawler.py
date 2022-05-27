@@ -20,7 +20,7 @@ import time
 import random
 import logging
 import requests
-
+import datetime
 
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s')
@@ -40,7 +40,7 @@ class Crawler:
             self.crawler()
             if self.just_run_once:
                 break
-            time.sleep(21600) # 6 hour 爬取一次
+            time.sleep(120) # 120s 爬取一次
             
 
     def crawler(self):
@@ -51,6 +51,8 @@ class Crawler:
                 }
             )
             self.crawl_timestamp = int(time.time() * 1000)
+            self._today = datetime.datetime.now().strftime('%m/%d/%Y')
+            
             try:
                 r = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
                 r.encoding = 'utf-8'
@@ -113,29 +115,31 @@ class Crawler:
         overall_information.pop('imgUrl')
         overall_information.pop('deleted')
         overall_information['countRemark'] = overall_information['countRemark'].replace(' 疑似', '，疑似').replace(' 治愈', '，治愈').replace(' 死亡', '，死亡').replace(' ', '')
-
+        
+        # 去重限定日期
+        overall_information['_today'] = self._today
         if not self.db.find_one(collection='DXYOverall', data=overall_information):
             # find_one去重,如果数据库里面找到了这一条完全一样的信息，就停止爬取
             overall_information['updateTime'] = self.crawl_timestamp
 
             self.db.insert(collection='DXYOverall', data=overall_information)
 
-    def province_parser(self, province_information):
-        provinces = json.loads(province_information.group(0))
-        for province in provinces:
-            province.pop('id')
-            province.pop('tags')
-            province.pop('sort')
-            province['comment'] = province['comment'].replace(' ', '')
+    # def province_parser(self, province_information):
+    #     provinces = json.loads(province_information.group(0))
+    #     for province in provinces:
+    #         province.pop('id')
+    #         province.pop('tags')
+    #         province.pop('sort')
+    #         province['comment'] = province['comment'].replace(' ', '')
 
-            if self.db.find_one(collection='DXYProvince', data=province):
-                continue
+    #         if self.db.find_one(collection='DXYProvince', data=province):
+    #             continue
 
-            province['provinceEnglishName'] = city_name_map[province['provinceShortName']]['engName']
-            province['crawlTime'] = self.crawl_timestamp
-            province['country'] = country_type_map.get(province['countryType'])
+    #         province['provinceEnglishName'] = city_name_map[province['provinceShortName']]['engName']
+    #         province['crawlTime'] = self.crawl_timestamp
+    #         province['country'] = country_type_map.get(province['countryType'])
 
-            self.db.insert(collection='DXYProvince', data=province)
+    #         self.db.insert(collection='DXYProvince', data=province)
 
 
     def area_fetch_parser(self,area_fetchRecentStatV2):
@@ -158,13 +162,19 @@ class Crawler:
             
             # Because the cities are given other attributes,
             # this part should not be used when checking the identical document.
-            cities_backup = area.pop('cities')
+            
+            # But I think if city information changed 
+            # we still should save this difference, 
+            # so I comment code about pop('cities')
+            # cities_backup = area.pop('cities')
     
+            # 去重限定日期
+            area['_today'] = self._today
             if self.db.find_one(collection='DXYArea_f', data=area):
                 continue
     
             # If this document is not in current database, insert this attribute back to the document.
-            area['cities'] = cities_backup
+            # area['cities'] = cities_backup
     
             area['countryName'] = '中国'
             area['countryEnglishName'] = 'China'
@@ -181,39 +191,32 @@ class Crawler:
                         pass
                 else:
                     city['cityEnglishName'] = 'Area not defined'
-    
+            
             area['updateTime'] = self.crawl_timestamp
     
             self.db.insert(collection='DXYArea_f', data=area)
             
             
     def area_parser(self, area_information):
-        """
-        核心变量
-
-        Parameters
-        ----------
-        area_information : TYPE
-            DESCRIPTION.
-
-        Returns
-        -------
-        None.
-
-        """
         area_information = json.loads(area_information.group(0))
         for area in area_information:
             area['comment'] = area['comment'].replace(' ', '')
 
             # Because the cities are given other attributes,
             # this part should not be used when checking the identical document.
-            cities_backup = area.pop('cities')
-
-            if self.db.find_one(collection='DXYArea', data=area):
+            
+            # But I think if city information changed 
+            # we still should save this difference, 
+            # so I comment code about pop('cities')
+            # cities_backup = area.pop('cities')
+    
+            # 去重限定日期
+            area['_today'] = self._today
+            if self.db.find_one(collection='DXYArea_f', data=area):
                 continue
 
             # If this document is not in current database, insert this attribute back to the document.
-            area['cities'] = cities_backup
+            # area['cities'] = cities_backup
 
             area['countryName'] = '中国'
             area['countryEnglishName'] = 'China'
@@ -262,6 +265,8 @@ class Crawler:
             # Rename the key continents to continentName
             country['continentName'] = country.pop('continents')
 
+            # 去重限定日期
+            country['_today'] = self._today
             if self.db.find_one(collection='DXYArea', data=country):
                 continue
 
@@ -279,6 +284,9 @@ class Crawler:
         news = json.loads(news.group(0))
         for _news in news:
             _news.pop('pubDateStr')
+            
+            # 去重限定日期
+            _news['_today'] = self._today
             if self.db.find_one(collection='DXYNews', data=_news):
                 continue
             _news['crawlTime'] = self.crawl_timestamp
@@ -290,6 +298,9 @@ class Crawler:
         for rumor in rumors:
             rumor.pop('score')
             rumor['body'] = rumor['body'].replace(' ', '')
+            
+            # 去重限定日期
+            rumor['_today'] = self._today
             if self.db.find_one(collection='DXYRumors', data=rumor):
                 continue
             rumor['crawlTime'] = self.crawl_timestamp

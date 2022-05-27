@@ -36,40 +36,47 @@ area_fetchRecentStatV2 = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'
 #     self.area_fetch_parser(area_fetchRecentStatV2=area_fetchRecentStatV2)
     
 
-# def area_fetch_parser(self,area_fetchRecentStatV2):
-area_information = json.loads(area_fetchRecentStatV2.group(0))
-for area in area_information:
-    # 遍历所有地区
+
+area_information = re.search(r'\[(.*)\]', str(soup.find('script', attrs={'id': 'getAreaStat'})))
+area_information = json.loads(area_information.group(0))
+ 
+# # def area_fetch_parser(self,area_fetchRecentStatV2):
+# area_information = json.loads(area_fetchRecentStatV2.group(0))
+area = area_information[10]
+
+# for area in area_information:
+#     # 遍历所有地区
     
-    # Because the cities are given other attributes,
-    # this part should not be used when checking the identical document.
-    cities_backup = area.pop('cities')
+#     # Because the cities are given other attributes,
+#     # this part should not be used when checking the identical document.
+# cities_backup = area.pop('cities')
+print(area)
+print(type(area))
+#     # if self.db.find_one(collection='DXYArea_f', data=area):
+#     #     continue
 
-    # if self.db.find_one(collection='DXYArea_f', data=area):
-    #     continue
+#     # If this document is not in current database, insert this attribute back to the document.
+#     area['cities'] = cities_backup
 
-    # If this document is not in current database, insert this attribute back to the document.
-    area['cities'] = cities_backup
+#     area['countryName'] = '中国'
+#     area['countryEnglishName'] = 'China'
+#     area['continentName'] = '亚洲'
+#     area['continentEnglishName'] = 'Asia'
+#     area['provinceEnglishName'] = city_name_map[area['provinceShortName']]['engName']
 
-    area['countryName'] = '中国'
-    area['countryEnglishName'] = 'China'
-    area['continentName'] = '亚洲'
-    area['continentEnglishName'] = 'Asia'
-    area['provinceEnglishName'] = city_name_map[area['provinceShortName']]['engName']
+#     for city in area['cities']:
+#         if city['cityName'] != '待明确地区':
+#             try:
+#                 city['cityEnglishName'] = city_name_map[area['provinceShortName']]['cities'][city['cityName']]
+#             except KeyError:
+#                 print(area['provinceShortName'], city['cityName'])
+#                 pass
+#         else:
+#             city['cityEnglishName'] = 'Area not defined'
 
-    for city in area['cities']:
-        if city['cityName'] != '待明确地区':
-            try:
-                city['cityEnglishName'] = city_name_map[area['provinceShortName']]['cities'][city['cityName']]
-            except KeyError:
-                print(area['provinceShortName'], city['cityName'])
-                pass
-        else:
-            city['cityEnglishName'] = 'Area not defined'
+#     # area['updateTime'] = self.crawl_timestamp
 
-    # area['updateTime'] = self.crawl_timestamp
-
-    # self.db.insert(collection='DXYArea_f', data=area)
+#     # self.db.insert(collection='DXYArea_f', data=area)
     
 
 
