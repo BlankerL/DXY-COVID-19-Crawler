@@ -28,20 +28,20 @@ logger = logging.getLogger(__name__)
 
 
 class Crawler:
-    def __init__(self, just_run_once = True):
+    def __init__(self, just_run_once = True,freq = 21600):
         self.session = requests.session()
         self.db = DB()
         self.crawl_timestamp = int()
         self.just_run_once = just_run_once
-
+        self.freq = freq
 
     def run(self):
         while True:
             self.crawler()
             if self.just_run_once:
                 break
-            time.sleep(120) # 120s 爬取一次
-            
+            # time.sleep(120) # 120s 爬取一次
+            time.sleep(self.freq) # 6h 爬取一次         
 
     def crawler(self):
         while True:
@@ -105,6 +105,7 @@ class Crawler:
             break
 
         logger.info('Successfully crawled.')
+
 
     def overall_parser(self, overall_information):
           # .group(0)==group() 表示所有的re结果，.group(1)表目标为第一个

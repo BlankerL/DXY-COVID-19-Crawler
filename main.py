@@ -13,4 +13,5 @@ from service.crawler import Crawler
 
 if __name__ == '__main__':
     crawler = Crawler(just_run_once = False)
+    # crawler = Crawler(just_run_once = False, freq=21600) # freq unit is second
     crawler.run()
