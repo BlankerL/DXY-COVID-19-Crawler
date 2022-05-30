@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 
 class Crawler:
-    def __init__(self, just_run_once = True,freq = 21600):
+    def __init__(self, just_run_once = True,freq = 28800):
         self.session = requests.session()
         self.db = DB()
         self.crawl_timestamp = int()
@@ -41,7 +41,7 @@ class Crawler:
             if self.just_run_once:
                 break
             # time.sleep(120) # 120s 爬取一次
-            time.sleep(self.freq) # 6h 爬取一次         
+            time.sleep(self.freq) # 8h 爬取一次         
 
     def crawler(self):
         while True:
