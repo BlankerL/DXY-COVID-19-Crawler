@@ -8,7 +8,7 @@ from pymongo import MongoClient
 
 
 uri = '**Confidential**'
-uri = 'localhost:27017'
+uri = 'mongodb://admin:cuhk_tsinghua_lpk@localhost:27017'
 client = MongoClient(uri)  
 db = client['2019-nCoV'] # use 2019-nCoV 有就切换，没有就创建该数据库
 

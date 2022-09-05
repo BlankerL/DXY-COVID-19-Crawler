@@ -12,7 +12,7 @@ from service.crawler import Crawler
 import time  # 导入此模块，获取当前时间
 
 
-def timed_start(my_hour = '19',my_minute = '00'):
+def timed_start(my_hour = '11',my_minute = '35'):
     flag = 1
     while flag:
         t = time.localtime()  # 当前时间的纪元值

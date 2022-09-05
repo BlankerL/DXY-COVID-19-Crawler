@@ -56,6 +56,7 @@ class Crawler:
             try:
                 r = self.session.get(url='https://ncov.dxy.cn/ncovh5/view/pneumonia')
                 r.encoding = 'utf-8'
+                self.session.close()
             except requests.exceptions.ChunkedEncodingError:
                 continue
             soup = BeautifulSoup(r.content, 'lxml')
