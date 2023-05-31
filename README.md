@@ -2,8 +2,8 @@
 本项目fork from BlankerL/DXY-COVID-19-Crawler
 再其基础上 加入了无症状感染者的数据的feature，和数据库查重模式的优化
 爬取的数据保存的服务器位于 CUHK Economic department
-
-
+2023年后已经停止更新数据库
+以下是原作者的readme，其实大部分内容已经过期，但是未来保留原味，不做删改，直接放送如下
 
 # 2019新型冠状病毒疫情实时爬虫
 
