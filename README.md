@@ -1,3 +1,10 @@
+
+本项目fork from BlankerL/DXY-COVID-19-Crawler
+再其基础上 加入了无症状感染者的数据的feature，和数据库查重模式的优化
+爬取的数据保存的服务器位于 CUHK Economic department
+
+
+
 # 2019新型冠状病毒疫情实时爬虫
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)](https://lab.isaaclin.cn/nCoV/)
