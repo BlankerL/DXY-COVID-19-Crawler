@@ -5,6 +5,9 @@
 
 以下是原作者的readme，其实大部分内容已经过期，但是未来保留原味，不做删改，直接放送如下
 
+This project was forked from BlankerL/DXY-COVID-19-Crawler. On its basis, features of asymptomatic infectee data and optimization of database de-duplication mode were added. After 2023, DXY has stopped updating the database, so this project is no longer updated.
+
+Below is the original author's readme. Actually, most of the content is outdated, but for the sake of preserving its originality, no deletions or modifications are made, and it is presented directly as follows:
 # 2019新型冠状病毒疫情实时爬虫
 
 [![API Status](https://img.shields.io/website?url=https%3A%2F%2Flab.isaaclin.cn)](https://lab.isaaclin.cn/nCoV/)
