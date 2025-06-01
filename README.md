@@ -6,13 +6,15 @@
 
 简体中文 | [English](README.en.md)
 
+> 由于各个新冠疫情数据源已停止更新，本项目无法收录新的疫情数据信息，故转入“归档”模式。代码仍可供学习使用，历史数据也可以从[数据仓库](https://github.com/BlankerL/DXY-COVID-19-Data)中获取，但API服务已经下线。
+
 本项目为2019新型冠状病毒（COVID-19/2019-nCoV）疫情状况的实时爬虫，数据来源为[丁香园](https://3g.dxy.cn/newh5/view/pneumonia)。
 
 感谢大家对本项目的支持，为了不让爬虫泛滥占用过多流量，导致其他更有需要的用户无法及时获取到丁香园的数据，请大家减少对爬虫的部署。
 
 我已经开放了一个API接口，其他人如果需要这份数据做其他的可视化，可以直接查看并调用API来获取数据，把丁香园的流量让给更有需要的人。
 
-API：https://lab.isaaclin.cn/nCoV  
+API：https://lab.isaaclin.cn/nCoV
 注：
 1. **API返回中英文城市名称。** 更多信息可以关注[Issue #61](https://github.com/BlankerL/DXY-COVID-19-Crawler/issues/61)。
 2. **受限于服务器带宽压力，自2020年3月19日起，API接口`/nCoV/api/overall`及`/nCoV/api/area`不再返回时间序列数据，时间序列数据可以在数据仓库的[json](https://github.com/BlankerL/DXY-COVID-19-Data/tree/master/json)文件夹下获取。如果您调用接口时使用了`latest=0`参数，则需要修改请求，否则无需修改。**
@@ -43,26 +45,26 @@ API：https://lab.isaaclin.cn/nCoV
 
 ## Research
 所有研究结果均仅作为参考。
-1. [yijunwang0805/YijunWang](https://github.com/yijunwang0805/YijunWang)  
+1. [yijunwang0805/YijunWang](https://github.com/yijunwang0805/YijunWang)
 
 ## Demo
-1. 网站：https://ncov.deepeye.tech/  
+1. 网站：https://ncov.deepeye.tech/
    时间序列疫情地图、疫情小区及分析报告。
-2. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)  
+2. [pzhaonet/ncov](https://github.com/pzhaonet/ncov)
    网站：https://ncov2020.org
-3. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)  
+3. [cuihuan/2020_wuhan](https://github.com/cuihuan/2020_wuhan)
    可视化效果：http://cuihuan.net/wuhan/news.html
-4. [hack-fang/nCov](https://github.com/hack-fang/nCov)  
+4. [hack-fang/nCov](https://github.com/hack-fang/nCov)
    可视化效果：http://yiqing.ahusmart.com/
-5. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)  
+5. [ohdarling/2019-nCoV-Charts](https://github.com/ohdarling/2019-nCoV-Charts)
    可视化效果：https://2019-ncov-trends.tk/
-6. [quadpixels/quadpixels.github.io](https://github.com/quadpixels/quadpixels.github.io)  
+6. [quadpixels/quadpixels.github.io](https://github.com/quadpixels/quadpixels.github.io)
    可视化效果：https://quadpixels.github.io/
-7. [lzxue/yiqingditu](https://github.com/lzxue/yiqingditu)  
+7. [lzxue/yiqingditu](https://github.com/lzxue/yiqingditu)
    可视化效果：https://lzxue.github.io/yiqingditu/
-8. [covid19viz/covid19viz.github.io](https://github.com/covid19viz/covid19viz.github.io)  
+8. [covid19viz/covid19viz.github.io](https://github.com/covid19viz/covid19viz.github.io)
    可视化效果：https://covid19viz.github.io/
-9. [biluochun/data-ncov](https://github.com/biluochun/data-ncov)  
+9. [biluochun/data-ncov](https://github.com/biluochun/data-ncov)
    可视化效果：https://biluochun.github.io/data-ncov/index.html
 10. [Moyck/2019NCOV](https://github.com/Moyck/2019NCOV)
 11. [Mistletoer/NCP-historical-data-visualization-2019-nCoV-](https://github.com/Mistletoer/NCP-historical-data-visualization-2019-nCoV-)
